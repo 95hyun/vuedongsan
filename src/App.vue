@@ -2,7 +2,7 @@
 
 <!--  <ModalComponent :데이터이름="데이터이름"/>-->
 <!--  <ModalComponent :작명="원룸들"/>-->
-  <ModalComponent :원룸들="원룸들" :누른거="누른거" :모달창열렸니="모달창열렸니"/>
+  <ModalComponent @closeModal="모달창열렸니 = false" :원룸들="원룸들" :누른거="누른거" :모달창열렸니="모달창열렸니"/>
 
   <div class="menu">
     <a v-for="menus in 메뉴들" :key="menus">{{ menus }}</a>
@@ -10,8 +10,9 @@
 
   <DiscountBanner/>
 
-  <CardComponent v-for ="(원룸들, id) in 원룸들" :key="id" :원룸들="원룸들" />
-
+  <CardComponent @openModalEmit="openModal($event)" v-for ="(원룸들, id) in 원룸들" :key="id" :원룸="원룸들" />
+<!--  $event는 자식이 보낸 데이터가 담겨있음-->
+<!--  그냥 id 라고해도됨-->
 </template>
 
 <script>
