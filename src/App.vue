@@ -2,8 +2,9 @@
 
   <div class="black-bg" v-if="모달창열렸니 == true">
     <div class="white-bg">
-      <h4>{{ rooms[selectedRoomId].modalTitle }}</h4>
-      <p>{{ rooms[selectedRoomId].modalDetail }}</p>
+      <img :src="원룸들[selectedRoomId].image" alt="room" class="room-img"/>
+      <h4>{{ 원룸들[selectedRoomId].title }}</h4>
+      <p>{{ 원룸들[selectedRoomId].content }}</p>
       <button @click="모달창열렸니 = false">닫기</button>
     </div>
   </div>
@@ -15,53 +16,29 @@
     <a v-for="menus in 메뉴들" :key="menus">{{ menus }}</a>
   </div>
 
-  <div v-for="(rooms, id) in rooms" :key="id">
-    <img :src="rooms.img" alt="room" class="room-img">
-    <h4 @click="openModal(id)"> {{ rooms.product }}</h4>
-    <a> {{ rooms.price }} 만원</a>
-    <button @click="increase(i)">허위매물신고</button> <span> 신고수 : {{ rooms.신고수 }}</span>
+  <div v-for="(원룸들, id) in 원룸들" :key="id">
+    <img :src="원룸들.image" alt="room" class="room-img">
+    <h4 @click="openModal(id)"> {{ 원룸들.title }}</h4>
+    <a> {{ 원룸들.price }} 만원</a>
+<!--    <button @click="increase(i)">허위매물신고</button> <span> 신고수 : {{ rooms.신고수 }}</span>-->
   </div>
 
 </template>
 
 <script>
+import oneroomData from './assets/data/oneroom.js';
 
 export default {
   name: 'App',
   data() {
     return {
-      rooms : [
-        { id: 0,
-          product: '역삼동원룸',
-          price: 70,
-          신고수: 0,
-          img: require('./assets/room0.jpg'),
-          modalTitle: '역삼동원룸 제목',
-          modalDetail: '역삼동원룸 자세한 설명'},
-        { id: 1,
-          product: '천호동원룸',
-          price: 60,
-          신고수: 0,
-          img: require('./assets/room1.jpg'),
-          modalTitle: '천호동원룸 제목',
-          modalDetail: '천호동원룸 자세한 설명'},
-        { id: 2,
-          product: '마포구원룸',
-          price: 50,
-          신고수: 0,
-          img: require('./assets/room2.jpg'),
-          modalTitle: '마포구원룸 제목',
-          modalDetail: '마포구원룸 자세한 설명'},
-      ],
+      원룸들 : oneroomData,
       메뉴들 : ['Home', 'Shop', 'About'],
       모달창열렸니 : false,
       selectedRoomId: [],
     }
   },
   methods: {
-    increase(i) {
-      this.rooms[i].신고수 += 1;
-    },
     openModal(id) {
       this.모달창열렸니 = true;
       this.selectedRoomId = id;
