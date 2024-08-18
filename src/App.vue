@@ -1,33 +1,24 @@
 <template>
 
-  <div class="black-bg" v-if="모달창열렸니 == true">
-    <div class="white-bg">
-      <img :src="원룸들[누른거].image" alt="room" class="room-img"/>
-      <h4>{{ 원룸들[누른거].title }}</h4>
-      <p>{{ 원룸들[누른거].price }}원</p>
-      <p>{{ 원룸들[누른거].content }}</p>
-      <button @click="모달창열렸니 = false">닫기</button>
-    </div>
-  </div>
-<!--  동적인 UI 만드는 법 :-->
-<!--  1. UI의 현재 상태를 데이터로 저장해둠-->
-<!--  2. 데이터에 따라 UI가 어떻게 보일지 작성-->
+<!--  <ModalComponent :데이터이름="데이터이름"/>-->
+<!--  <ModalComponent :작명="원룸들"/>-->
+  <ModalComponent :원룸들="원룸들" :누른거="누른거" :모달창열렸니="모달창열렸니"/>
 
   <div class="menu">
     <a v-for="menus in 메뉴들" :key="menus">{{ menus }}</a>
   </div>
 
-  <div v-for="(원룸들, id) in 원룸들" :key="id">
-    <img :src="원룸들.image" alt="room" class="room-img">
-    <h4 @click="openModal(id)"> {{ 원룸들.title }}</h4>
-    <a> {{ 원룸들.price }}원</a>
-<!--    <button @click="increase(i)">허위매물신고</button> <span> 신고수 : {{ rooms.신고수 }}</span>-->
-  </div>
+  <DiscountBanner/>
+
+  <CardComponent v-for ="(원룸들, id) in 원룸들" :key="id" :원룸들="원룸들" />
 
 </template>
 
 <script>
 import oneroomData from './assets/data/oneroom.js';
+import DiscountBanner from "@/DiscountBanner.vue";
+import ModalComponent from "@/ModalComponent.vue";
+import CardComponent from "@/CardComponent.vue";
 
 export default {
   name: 'App',
@@ -46,7 +37,9 @@ export default {
     },
   },
   components: {
-
+    CardComponent,
+    ModalComponent,
+    DiscountBanner
   },
 }
 </script>
@@ -101,4 +94,5 @@ div {
   padding: 20px;
 
 }
+
 </style>
