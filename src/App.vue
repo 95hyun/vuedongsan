@@ -2,9 +2,10 @@
 
   <div class="black-bg" v-if="모달창열렸니 == true">
     <div class="white-bg">
-      <img :src="원룸들[selectedRoomId].image" alt="room" class="room-img"/>
-      <h4>{{ 원룸들[selectedRoomId].title }}</h4>
-      <p>{{ 원룸들[selectedRoomId].content }}</p>
+      <img :src="원룸들[누른거].image" alt="room" class="room-img"/>
+      <h4>{{ 원룸들[누른거].title }}</h4>
+      <p>{{ 원룸들[누른거].price }}원</p>
+      <p>{{ 원룸들[누른거].content }}</p>
       <button @click="모달창열렸니 = false">닫기</button>
     </div>
   </div>
@@ -19,7 +20,7 @@
   <div v-for="(원룸들, id) in 원룸들" :key="id">
     <img :src="원룸들.image" alt="room" class="room-img">
     <h4 @click="openModal(id)"> {{ 원룸들.title }}</h4>
-    <a> {{ 원룸들.price }} 만원</a>
+    <a> {{ 원룸들.price }}원</a>
 <!--    <button @click="increase(i)">허위매물신고</button> <span> 신고수 : {{ rooms.신고수 }}</span>-->
   </div>
 
@@ -35,13 +36,13 @@ export default {
       원룸들 : oneroomData,
       메뉴들 : ['Home', 'Shop', 'About'],
       모달창열렸니 : false,
-      selectedRoomId: [],
+      누른거: null,
     }
   },
   methods: {
     openModal(id) {
       this.모달창열렸니 = true;
-      this.selectedRoomId = id;
+      this.누른거 = id;
     },
   },
   components: {
