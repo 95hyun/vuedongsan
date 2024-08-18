@@ -1,4 +1,10 @@
 <template>
+  <div class="menu">
+    <a>Home</a>
+    <a>Products</a>
+    <a>About</a>
+  </div>
+
   <img alt="Vue logo" src="./assets/logo.png">
   <div>
     <h4>{{ products[0] }}</h4>
@@ -38,5 +44,18 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.menu {
+  background: darkslateblue;
+  padding: 15px;
+  border-radius: 5px;
+
+}
+
+.menu a {
+  color: white;
+  padding: 10px;
+
 }
 </style>
